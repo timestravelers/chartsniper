@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChartSniper Pro v3</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- OpenCV.js -->
+  <script async src="https://docs.opencv.org/4.5.0/opencv.js"></script>
+
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+
+  <!-- jsPDF & html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif';
+      margin: 0;
+      background: #f9fafb; 
+      color: #333;
+    }
+
+    header {
+      background: #1a73e8;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1.5rem;
+    }
+
+    video, canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-top: 1rem;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #155ea4;
+    }
+
+    #analysis {
+      margin-top: 2rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .tradingview-widget-container {
+      margin-top: 2rem;
+    }
+
+    i.fa-chart-line {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <i class="fas fa-chart-line"></i>
+  <h1>ChartSniper Pro v3</h1>
+  <p>Pendeteksi Pola & Prediksi Harga Real-Time</p>
+</header>
+
+<div class="container">
+  <video id="video" autoplay playsinline></video>
+  <button onclick="capture()">📸 Ambil Gambar</button>
+  <canvas id="canvas" style="display:none;"></canvas>
+
+  <div id="analysis">
+    <h3>📊 Hasil Analisis:</h3>
+    <p>Tunggu hingga Anda mengambil gambar.</p>
+  </div>
+
+  <button onclick="shareAnalysis()"><i class="fas fa-share-alt"></i> Share</button>
+  <button onclick="exportToPDF()"><i class="fas fa-file-pdf"></i> Export PDF</button>
+
+  <div class="tradingview-widget-container">
+    <div id="tradingview_chart"></div>
+  </div>
+</div>
+
+<audio id="successSound" src="assets/ding.mp3"></audio>
+
+<script src="js/ai-model.js"></script>
+<script src="js/api.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+
+<!-- TradingView Script -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script> 
+
+</body>
+</html>
